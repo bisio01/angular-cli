@@ -1,42 +1,22 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "declaration": true,
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "module": "es2015",
+    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "mapRoot": "",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "noEmitOnError": true,
-    "noImplicitAny": true,
-    "noUnusedParameters": true,
-    "noUnusedLocals": true,
-    "outDir": "./dist",
-    "rootDir": ".",
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "sourceRoot": "",
-    "target": "es6",
-    "lib": [
-      "es2017"
-    ],
-    "baseUrl": "",
+    "importHelpers": true,
+    "target": "es5",
     "typeRoots": [
-      "./node_modules/@types"
+      "node_modules/@types"
     ],
-    "types": [
-      "jasmine",
-      "node"
-    ],
-    "paths": {
-      "@ngtools/json-schema": [ "./packages/@ngtools/json-schema/src" ],
-      "@ngtools/logger": [ "./packages/@ngtools/logger/src" ],
-      "@ngtools/webpack": [ "./packages/@ngtools/webpack/src" ]
-    }
-  },
-  "exclude": [
-    "packages/@angular/cli/blueprints/*/files/**/*",
-    "dist/**/*",
-    "node_modules/**/*",
-    "tmp/**/*"
-  ]
+    "lib": [
+      "es2018",
+      "dom"
+    ]
+  }
 }
