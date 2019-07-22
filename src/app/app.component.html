@@ -1,11 +1,16 @@
 <div class="form-field" [formGroup]="formGroup">
   <input formControlName="name">
-  <button (click)="send()"></button>
-</div>
+  <button (click)="send()">add</button>
 
-<div *ngFor="let employee of employees">
-  <span>{{employee?.employee_name}} {{employee?.employee_age}}</span>
-  <span></span>
 </div>
+<table>
+  <tr *ngFor="let employee of employees">
+    <td>{{employee?.employee_name}}</td>
+    <td> {{employee?.employee_age}}</td>
+    <td>
+      <button (click)="delete(employee?.id)">delete</button>
+    </td>
+  </tr>
+</table>
 
 <router-outlet></router-outlet>

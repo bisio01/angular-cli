@@ -15,4 +15,8 @@ export class EmployeeService {
     console.log(employee, 'employee');
     return this.http.post('http://dummy.restapiexample.com/api/v1/create', employee);
   }
+  deleteEmployee(targetId) {
+    console.log(targetId, 'targetId');
+    return this.http.delete<void>(`http://dummy.restapiexample.com/api/v1/delete/${targetId}`);
+  }
 }

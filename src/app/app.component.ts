@@ -13,11 +13,15 @@ export class AppComponent {
   public formControl;
   constructor(public employeeService: EmployeeService,
               public fb: FormBuilder) {
+    this.get();
+    this.create();
+  }
+
+  get() {
     this.employeeService.getEmployee().subscribe((res) => {
       this.employees = res;
       console.log(res, 'res');
     });
-    this.create();
   }
 
   create() {
@@ -32,6 +36,12 @@ export class AppComponent {
   send() {
     this.employeeService.createEmployee(this.formGroup.getRawValue()).subscribe((res) => {
       console.log(res, 'resqweqwe');
+    });
+  }
+
+  delete(id) {
+    this.employeeService.deleteEmployee(id).subscribe((res) => {
+      this.get();
     });
   }
 }
