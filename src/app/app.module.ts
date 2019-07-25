@@ -8,6 +8,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { reducers } from './api/store/reducers';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { EmployeesEffect } from './api/store/effects/employees';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,9 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([EmployeesEffect])
   ],
   providers: [EmployeeService],
   bootstrap: [AppComponent]

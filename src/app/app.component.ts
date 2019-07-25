@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { EmployeeService } from './api/employee/employee.service';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { AddEmployee, LoadEmployees, RemoveEmployee } from './api/store/actions/employees';
+import { AppState, getEmployees } from './api/store/reducers';
 
 @Component({
   selector: 'app-root',
@@ -9,18 +12,22 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 })
 export class AppComponent {
   public employees;
+  public employees$;
   public formGroup: FormGroup;
   public formControl;
+
   constructor(public employeeService: EmployeeService,
+              public store: Store<AppState>,
               public fb: FormBuilder) {
     this.get();
     this.create();
   }
 
   get() {
-    this.employeeService.getEmployee().subscribe((res) => {
+    this.store.dispatch(new LoadEmployees());
+    this.employees$ = this.store.select(getEmployees);
+    this.employees$.subscribe((res) => {
       this.employees = res;
-      console.log(res, 'res');
     });
   }
 
@@ -34,14 +41,13 @@ export class AppComponent {
   }
 
   send() {
-    this.employeeService.createEmployee(this.formGroup.getRawValue()).subscribe((res) => {
-      console.log(res, 'resqweqwe');
-    });
+    this.store.dispatch(new AddEmployee(this.formGroup.getRawValue()));
   }
 
   delete(id) {
-    this.employeeService.deleteEmployee(id).subscribe((res) => {
+    this.store.dispatch(new RemoveEmployee(id));
+    /*this.employeeService.deleteEmployee(id).subscribe((res) => {
       this.get();
-    });
+    });*/
   }
 }
