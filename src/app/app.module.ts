@@ -12,6 +12,8 @@ import { reducers } from './api/store/reducers';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { EmployeesEffect } from './api/store/effects/employees';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { EmployeesEffect } from './api/store/effects/employees';
     CommonModule,
     NgZorroAntdModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([EmployeesEffect])
+    EffectsModule.forRoot([EmployeesEffect]),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [EmployeeService],
   bootstrap: [AppComponent]
